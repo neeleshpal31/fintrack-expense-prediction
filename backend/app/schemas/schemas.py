@@ -286,6 +286,7 @@ class CategorySuggestionRequest(BaseModel):
     transaction_type: Optional[str] = "expense"
 
 class CategorySuggestionResponse(BaseModel):
+    model_config = {"protected_namespaces": ()}
     suggested_category_id: Optional[str]
     suggested_category_name: Optional[str]
     confidence: float

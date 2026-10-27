@@ -22,6 +22,17 @@ ROOT_DIR = Path(__file__).resolve().parent
 BACKEND_DIR = ROOT_DIR / "backend"
 FRONTEND_DIR = ROOT_DIR / "frontend"
 
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+if hasattr(sys.stderr, "reconfigure"):
+    try:
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 
 def is_port_in_use(port: int, host: str = "127.0.0.1") -> bool:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -49,7 +60,7 @@ def main():
     processes = []
 
     print("=" * 65)
-    print("  🚀 FinTrack AI — Intelligent Expense & Finance Predictor")
+    print("  [FinTrack AI] - Intelligent Expense & Finance Predictor")
     print("=" * 65)
 
     try:
@@ -91,11 +102,11 @@ def main():
 
         print("\n" + "-" * 65)
         if run_frontend:
-            print(f"  👉 Web Application:   http://localhost:{args.frontend_port}")
+            print(f"  -> Web Application:   http://localhost:{args.frontend_port}")
         if run_backend:
-            print(f"  👉 Backend API:       http://{args.host}:{args.port}")
-            print(f"  👉 Swagger Docs:      http://{args.host}:{args.port}/docs")
-            print(f"  👉 Health Check:      http://{args.host}:{args.port}/health")
+            print(f"  -> Backend API:       http://{args.host}:{args.port}")
+            print(f"  -> Swagger Docs:      http://{args.host}:{args.port}/docs")
+            print(f"  -> Health Check:      http://{args.host}:{args.port}/health")
         print("-" * 65)
         print("  Press Ctrl+C to stop all servers cleanly.\n")
 
@@ -124,7 +135,7 @@ def main():
                     proc.wait(timeout=3)
                 except subprocess.TimeoutExpired:
                     proc.kill()
-        print("[✓] All processes stopped.")
+        print("[OK] All processes stopped.")
 
 
 if __name__ == "__main__":
